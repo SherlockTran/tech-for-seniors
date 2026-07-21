@@ -1,26 +1,60 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
 @theme inline {
+  /* Màu sắc chủ đạo (Xanh dương đậm - dễ nhìn cho người lớn tuổi) */
+  --color-primary-50: #eff6ff;
+  --color-primary-100: #dbeafe;
+  --color-primary-500: #3b82f6;
+  --color-primary-600: #2563eb;
+  --color-primary-700: #1d4ed8; /* Độ tương phản cao */
+  --color-primary-900: #1e3a8a;
+
+  /* Cảnh báo / Nổi bật (Cam/Đỏ) */
+  --color-accent-500: #ef4444;
+  --color-accent-700: #b91c1c;
+
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
 }
 
+:root {
+  /* Giao diện sáng (Mặc định) - Nền hơi xám nhẹ để đỡ chói mắt, chữ đen đậm */
+  --background: #f8fafc; 
+  --foreground: #0f172a; 
+}
+
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    /* Giao diện tối - Nền đen, chữ trắng sáng */
+    --background: #0f172a;
+    --foreground: #f8fafc;
   }
+}
+
+html {
+  /* TĂNG KÍCH THƯỚC CHỮ MẶC ĐỊNH (1rem = 20px thay vì 16px) */
+  /* Điều này làm cho tất cả các class text-base, text-lg của Tailwind tự động to lên */
+  font-size: 20px; 
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
+  line-height: 1.6;
+  /* Chống bôi đen text không cần thiết khi người già chạm ngón tay trên màn hình */
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* Các lớp tiện ích đặc thù cho UI người cao tuổi */
+@layer utilities {
+  .btn-elderly {
+    @apply px-6 py-4 rounded-xl font-bold text-center active:scale-95 transition-transform;
+  }
+  
+  .btn-primary {
+    @apply bg-primary-700 text-white border-2 border-primary-900 shadow-lg;
+  }
 }
