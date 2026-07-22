@@ -1,6 +1,6 @@
 import { ArrowLeft, PlayCircle } from "lucide-react";
 import Link from "next/link";
-import Image from "next/image";
+import TutorialSteps from "@/components/TutorialSteps";
 
 // Mock data tạm thời để kiểm tra UI
 const mockTutorials = {
@@ -13,16 +13,19 @@ const mockTutorials = {
         stepNumber: 1,
         text: "Mở ứng dụng Zalo trên điện thoại. Bạn sẽ thấy biểu tượng màu xanh dương có chữ Zalo.",
         imageUrl: "https://placehold.co/600x400/eff6ff/1d4ed8?text=Zalo+Icon",
+        audioUrl: "https://www.w3schools.com/html/horse.mp3",
       },
       {
         stepNumber: 2,
         text: "Tìm tên người thân trong danh bạ hoặc ô tìm kiếm ở phía trên cùng màn hình.",
         imageUrl: "https://placehold.co/600x400/eff6ff/1d4ed8?text=Tim+Kiem",
+        audioUrl: "https://www.w3schools.com/html/horse.mp3",
       },
       {
         stepNumber: 3,
         text: "Bấm vào biểu tượng Hình chiếc điện thoại hoặc Máy quay phim để bắt đầu gọi.",
         imageUrl: "https://placehold.co/600x400/eff6ff/1d4ed8?text=Nut+Goi",
+        audioUrl: "https://www.w3schools.com/html/horse.mp3",
       },
     ],
   },
@@ -35,11 +38,13 @@ const mockTutorials = {
         stepNumber: 1,
         text: "Mở ứng dụng VNeID và nhập mật khẩu hoặc quét khuôn mặt để đăng nhập.",
         imageUrl: "https://placehold.co/600x400/fef2f2/b91c1c?text=Dang+Nhap",
+        audioUrl: "https://www.w3schools.com/html/horse.mp3",
       },
       {
         stepNumber: 2,
         text: "Chọn mục 'Ví giấy tờ' ở thanh Menu phía dưới màn hình.",
         imageUrl: "https://placehold.co/600x400/fef2f2/b91c1c?text=Vi+Giay+To",
+        audioUrl: "https://www.w3schools.com/html/horse.mp3",
       },
     ],
   },
@@ -105,43 +110,8 @@ export default async function TutorialPage({ params }: { params: Promise<{ id: s
           </div>
         </section>
 
-        {/* Danh sách các bước */}
-        <section>
-          <h2 className="text-3xl font-bold text-gray-800 mb-8 border-b-4 border-primary-200 pb-4 inline-block">
-            Hướng dẫn Từng Bước
-          </h2>
-          
-          <div className="space-y-12">
-            {tutorial.steps.map((step) => (
-              <div
-                key={step.stepNumber}
-                className="bg-white rounded-3xl p-6 md:p-8 shadow-md border-l-8 border-primary-500 flex flex-col md:flex-row gap-8"
-              >
-                {/* Phần Hình Ảnh */}
-                <div className="w-full md:w-1/2 rounded-2xl overflow-hidden border-2 border-gray-200 flex-shrink-0">
-                  <Image
-                    src={step.imageUrl}
-                    alt={`Bước ${step.stepNumber}`}
-                    width={600}
-                    height={400}
-                    className="w-full h-auto object-cover"
-                    unoptimized // Tạm thời dùng unoptimized cho ảnh placehold.co
-                  />
-                </div>
-
-                {/* Phần Chữ */}
-                <div className="w-full md:w-1/2 flex flex-col justify-center">
-                  <span className="inline-block bg-primary-100 text-primary-800 font-bold text-2xl py-2 px-6 rounded-full mb-6 w-max">
-                    Bước {step.stepNumber}
-                  </span>
-                  <p className="text-2xl md:text-3xl font-medium leading-relaxed text-gray-800">
-                    {step.text}
-                  </p>
-                </div>
-              </div>
-            ))}
-          </div>
-        </section>
+        {/* Danh sách các bước (Đã tách thành Client Component) */}
+        <TutorialSteps title={tutorial.title} steps={tutorial.steps} />
       </div>
     </main>
   );
